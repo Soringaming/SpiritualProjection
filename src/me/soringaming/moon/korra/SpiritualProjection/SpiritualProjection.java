@@ -110,6 +110,7 @@ public class SpiritualProjection extends SpiritualAbility implements AddonAbilit
 	@Override
 	public String getAuthor() {
 		return "Soringaming, SquirtleHerder and Moon243";
+		//sorin was here :P
 	}
 
 	@Override
