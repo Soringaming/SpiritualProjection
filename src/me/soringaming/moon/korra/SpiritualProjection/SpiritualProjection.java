@@ -1,76 +1,84 @@
 package me.soringaming.moon.korra.SpiritualProjection;
 
+import java.util.logging.Level;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 
+import com.projectkorra.projectkorra.ProjectKorra;
 import com.projectkorra.projectkorra.ability.AddonAbility;
 import com.projectkorra.projectkorra.ability.SpiritualAbility;
 
 public class SpiritualProjection extends SpiritualAbility implements AddonAbility {
-
+	
+	private Player player;
+	private Location loc;
+	private Location start;
+	private Permission perm;
+	
 	public SpiritualProjection(Player player) {
 		super(player);
-		// TODO Auto-generated constructor stub
+		this.player = player;
+		this.loc = player.getLocation();
+		this.start = player.getLocation();
 	}
 
 	@Override
 	public long getCooldown() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Location getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return player.getLocation();
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "SpiritualProjection";
 	}
 
 	@Override
 	public boolean isHarmlessAbility() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isSneakAbility() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void progress() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String getAuthor() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Soringaming, SquirtleHerder and Moon243";
 	}
 
 	@Override
 	public String getVersion() {
-		// TODO Auto-generated method stub
-		return null;
+		return "v1.0";
 	}
 
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
-		
+		ProjectKorra.plugin.getServer().getLogger().log(Level.INFO, getName() + " " + getVersion() + " Developed By " + getAuthor() + " Has Been Enabled.");
+		ProjectKorra.plugin.getServer().getPluginManager().registerEvents(new SpiritualProjectionListener(), ProjectKorra.plugin);
+		perm = new Permission("bending.ability.SpiritualProjection");
+		ProjectKorra.plugin.getServer().getPluginManager().addPermission(perm);
+		perm.setDefault(PermissionDefault.TRUE);
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-		
+		ProjectKorra.plugin.getServer().getLogger().log(Level.INFO, getName() + " " + getVersion() + " Developed By " + getAuthor() + " Has Been Disabled.");
+		ProjectKorra.plugin.getServer().getPluginManager().removePermission(perm);
+		super.remove();
 	}
 
 }
